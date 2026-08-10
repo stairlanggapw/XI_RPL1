@@ -1,16 +1,55 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import ClassStructure from './ClassStructure'
 import ClassMembers from './ClassMembers'
 
 function Structure() {
+  const sectionRef = useRef(null)
+  const headingRef = useRef(null)
+  const structureRef = useRef(null)
+  const membersRef = useRef(null)
+
+  useEffect(() => {
+    const elements = [
+      headingRef.current,
+      structureRef.current,
+      membersRef.current,
+    ]
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('structure-show')
+          }
+        })
+      },
+      {
+        threshold: 0.15,
+      }
+    )
+
+    elements.forEach((element) => {
+      if (element) observer.observe(element)
+    })
+
+    return () => {
+      elements.forEach((element) => {
+        if (element) observer.unobserve(element)
+      })
+    }
+  }, [])
+
   return (
     <section
-      id="structure"
-      className="relative overflow-hidden bg-[#292653] py-16 md:py-24"
+      ref={sectionRef}
+      className="relative overflow-hidden bg-[#292653] py-20 md:py-28"
     >
-      <div className="relative z-10 max-w-6xl mx-auto px-5 md:px-8">
+      <div className="container mx-auto px-5 md:px-10">
 
-        <div className="text-center text-white mb-10 md:mb-16">
+        <div
+          ref={headingRef}
+          className="structure-hidden text-center text-white mb-10 md:mb-16"
+        >
           <p className="text-xs md:text-sm uppercase tracking-[3px] md:tracking-[4px] text-white/60 mb-3">
             Our Class
           </p>
@@ -29,9 +68,19 @@ function Structure() {
           </p>
         </div>
 
-        <ClassStructure />
+        <div
+          ref={structureRef}
+          className="structure-hidden structure-delay-1"
+        >
+          <ClassStructure />
+        </div>
 
-        <ClassMembers />
+        <div
+          ref={membersRef}
+          className="structure-hidden structure-delay-2"
+        >
+          <ClassMembers />
+        </div>
 
       </div>
     </section>

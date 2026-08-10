@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from './components/Navbar'
+import SmoothScroll from './components/SmoothScroll'
 import Hero from './components/Hero'
 import TextBanner from './components/TextBanner'
 import About from './components/About'
@@ -10,16 +11,19 @@ import Footer from './components/Footer'
 
 const App = () => {
   return (
-    <main>
+    <>
+      <SmoothScroll />
       <Navbar />
-      <Hero />
-      <TextBanner />
-      <About />
-      <Structure />
-      <Gallery />
-      <Contact />
-      <Footer />
-    </main>
+      <main>
+        <Hero />
+        <TextBanner />
+        <About />
+        <Structure />
+        <Gallery />
+        <Contact />
+        <Footer />
+      </main>
+    </>
   )
 }
 

@@ -1,15 +1,40 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import assets from '../assets/assets'
 
 function Gallery() {
+  const galleryRef = useRef(null)
+
+  useEffect(() => {
+    const elements = galleryRef.current.querySelectorAll('.gallery-reveal')
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('gallery-show')
+          }
+        })
+      },
+      {
+        threshold: 0.15,
+      }
+    )
+
+    elements.forEach((element) => observer.observe(element))
+
+    return () => {
+      elements.forEach((element) => observer.unobserve(element))
+    }
+  }, [])
+
   return (
     <section
-      id="gallery"
-      className="relative overflow-hidden bg-[#292653] py-16 md:py-24"
+      ref={galleryRef}
+      className="relative overflow-hidden bg-[#292653] py-20 md:py-28"
     >
-      <div className="relative z-10 max-w-6xl mx-auto px-5 md:px-8">
+      <div className="container mx-auto px-5 md:px-10">
 
-        <div className="text-center text-white mb-10 md:mb-16">
+        <div className="gallery-reveal text-center text-white mb-10 md:mb-16">
           <p className="text-xs md:text-sm uppercase tracking-[3px] md:tracking-[4px] text-white/60 mb-3">
             Our Class
           </p>
@@ -17,6 +42,8 @@ function Gallery() {
           <h2 className="text-3xl md:text-5xl text-white font-bold">
             Class Gallery
           </h2>
+
+          <div className="w-20 md:w-24 h-1 bg-white mx-auto mt-5 md:mt-6"></div>
 
           <p className="text-sm md:text-lg leading-relaxed text-white/80 mt-5 md:mt-6 max-w-3xl mx-auto">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -28,12 +55,16 @@ function Gallery() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 mt-8 md:mt-10">
 
-          <div className="bg-white border-none rounded-2xl text-[#292653] overflow-hidden hover:bg-white/60 hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-300">
-            <img
-              src={assets.gallery1}
-              alt="Gallery 1"
-              className="w-full h-56 sm:h-52 md:h-64 object-cover"
-            />
+          <div
+            className="gallery-reveal gallery-delay-1 bg-white border-none rounded-2xl text-[#292653] overflow-hidden hover:bg-white/60 hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-300"
+          >
+            <div className="overflow-hidden">
+              <img
+                src={assets.gallery1}
+                alt="Gallery 1"
+                className="w-full h-56 sm:h-52 md:h-64 object-cover transition-transform duration-700 ease-out hover:scale-105"
+              />
+            </div>
 
             <h4 className="text-lg md:text-xl font-bold m-4">
               Gallery 1
@@ -44,12 +75,16 @@ function Gallery() {
             </p>
           </div>
 
-          <div className="bg-white border-none rounded-2xl text-[#292653] overflow-hidden hover:bg-white/60 hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-300">
-            <img
-              src={assets.gallery2}
-              alt="Gallery 2"
-              className="w-full h-56 sm:h-52 md:h-64 object-cover"
-            />
+          <div
+            className="gallery-reveal gallery-delay-2 bg-white border-none rounded-2xl text-[#292653] overflow-hidden hover:bg-white/60 hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-300"
+          >
+            <div className="overflow-hidden">
+              <img
+                src={assets.gallery2}
+                alt="Gallery 2"
+                className="w-full h-56 sm:h-52 md:h-64 object-cover transition-transform duration-700 ease-out hover:scale-105"
+              />
+            </div>
 
             <h4 className="text-lg md:text-xl font-bold m-4">
               Gallery 2
@@ -60,12 +95,16 @@ function Gallery() {
             </p>
           </div>
 
-          <div className="bg-white border-none rounded-2xl text-[#292653] overflow-hidden hover:bg-white/60 hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-300">
-            <img
-              src={assets.gallery3}
-              alt="Gallery 3"
-              className="w-full h-56 sm:h-52 md:h-64 object-cover"
-            />
+          <div
+            className="gallery-reveal gallery-delay-3 bg-white border-none rounded-2xl text-[#292653] overflow-hidden hover:bg-white/60 hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-300"
+          >
+            <div className="overflow-hidden">
+              <img
+                src={assets.gallery3}
+                alt="Gallery 3"
+                className="w-full h-56 sm:h-52 md:h-64 object-cover transition-transform duration-700 ease-out hover:scale-105"
+              />
+            </div>
 
             <h4 className="text-lg md:text-xl font-bold m-4">
               Gallery 3
@@ -78,8 +117,8 @@ function Gallery() {
 
         </div>
 
-        <div className="flex justify-center">
-          <button className="mt-8 px-5 md:px-6 py-2.5 md:py-3 bg-white text-black rounded-xl text-base md:text-lg hover:bg-gray-300 hover:-translate-y-1 transition">
+        <div className="gallery-reveal gallery-delay-4 flex justify-center">
+          <button className="mt-8 px-5 md:px-6 py-2.5 md:py-3 bg-white text-black rounded-xl text-base md:text-lg hover:bg-gray-300 hover:-translate-y-1 transition-all duration-300">
             View More →
           </button>
         </div>
