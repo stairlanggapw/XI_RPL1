@@ -41,6 +41,7 @@ function Structure() {
 
   return (
     <section
+      id='structure'
       ref={sectionRef}
       className="relative overflow-hidden bg-[#292653] py-20 md:py-28"
     >

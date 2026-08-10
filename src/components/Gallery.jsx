@@ -29,6 +29,7 @@ function Gallery() {
 
   return (
     <section
+      id='gallery'
       ref={galleryRef}
       className="relative overflow-hidden bg-[#292653] py-20 md:py-28"
     >
