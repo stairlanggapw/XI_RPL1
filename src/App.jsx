@@ -4,6 +4,7 @@ import SmoothScroll from './components/SmoothScroll'
 import Hero from './components/Hero'
 import TextBanner from './components/TextBanner'
 import About from './components/About'
+import Support from './components/Support'
 import Structure from './components/Structure'
 import Gallery from './components/Gallery'
 import Contact from './components/Contact'
@@ -18,6 +19,7 @@ const App = () => {
         <Hero />
         <TextBanner />
         <About />
+        <Support />
         <Structure />
         <Gallery />
         <Contact />

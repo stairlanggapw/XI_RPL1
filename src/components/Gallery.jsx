@@ -31,7 +31,7 @@ function Gallery() {
     <section
       id='gallery'
       ref={galleryRef}
-      className="relative overflow-hidden bg-[#292653] py-20 md:py-28"
+      className="relative overflow-hidden bg-[#292653] py-10 md:py-28"
     >
       <div className="container mx-auto px-5 md:px-10">
 
