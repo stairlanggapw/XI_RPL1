@@ -1,8 +1,49 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import assets from '../assets/assets'
 import { FaInstagram, FaTiktok, FaGithub, FaSpotify } from 'react-icons/fa'
 
 const Hero = () => {
+  const texts = [
+    'Welcome to',
+    'Creative Students',
+    'Future Developers',
+  ]
+
+  const [textIndex, setTextIndex] = useState(0)
+  const [displayText, setDisplayText] = useState('')
+  const text = 'Welcome to'
+  const [typingText, setTypingText] = useState('')
+  useEffect(() => {
+      let currentIndex = 0
+      let timeout
+      const typeText = () => {
+        const currentText = texts[textIndex]
+        const interval = setInterval(() => {
+          currentIndex++
+
+          setDisplayText(
+            currentText.slice(0, currentIndex)
+          )
+
+          if (currentIndex === currentText.length) {
+            clearInterval(interval)
+
+            timeout = setTimeout(() => {
+              setDisplayText('')
+
+              setTextIndex(
+                (prev) => (prev + 1) % texts.length
+              )
+            }, 3000)
+          }
+        }, 120)
+      }
+      typeText()
+      return () => {
+        clearTimeout(timeout)
+      }
+    }, [textIndex])
+
   return (
     <section
       id="home"
@@ -16,8 +57,9 @@ const Hero = () => {
 
       <div className="relative z-10 min-h-screen flex items-center px-6 md:px-10 lg:px-16 pt-24 md:pt-32">
         <div className="w-full max-w-xl text-white">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-            Welcome to
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold h-14">
+            {displayText}
+            <span className="typing-cursor">|</span>
           </h2>
 
           <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold leading-none">

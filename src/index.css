@@ -105,6 +105,16 @@ body {
   transform: translateY(0);
 }
 
+.typing-cursor {
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);
